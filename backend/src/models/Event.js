@@ -10,6 +10,10 @@ const eventSchema = new Schema({
         type : String,
         required: true
     },
+    imageUrl:{
+        type : String,
+        required: true
+    },
     venue: {
         type : String,
         required: true
@@ -24,7 +28,11 @@ const eventSchema = new Schema({
     },
     attendees:[
         { type: Schema.Types.ObjectId, ref: 'User' }
-    ] 
+    ] ,
+    createdBy: {
+        type: Schema.Types.ObjectId, 
+        ref: 'User'
+    }
 })
 
 
