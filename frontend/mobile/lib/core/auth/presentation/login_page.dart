@@ -1,4 +1,5 @@
 import 'package:lpu_events/core/auth/application/auth.dart';
+import 'package:lpu_events/core/home/presentation/home_page.dart';
 import 'package:lpu_events/widgets/loading_widget.dart';
 
 import '/globals.dart';
@@ -80,24 +81,25 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           ActionButton(
             isFilled: true,
             onPressed: () async {
-              if (email.trim().isEmpty) {
-                showToast("Enter a valid email");
-                return;
-              }
+              return goToPage(context, const HomePage(), clearStack: true);
+              // if (email.trim().isEmpty) {
+              //   showToast("Enter a valid email");
+              //   return;
+              // }
 
-              if (password.trim().isEmpty) {
-                showToast("Enter a valid password");
-                return;
-              }
+              // if (password.trim().isEmpty) {
+              //   showToast("Enter a valid password");
+              //   return;
+              // }
 
-              var res = await _authManager.loginUsingEmailPassword(
-                email: email.trim(),
-                password: password.trim(),
-              );
+              // var res = await _authManager.loginUsingEmailPassword(
+              //   email: email.trim(),
+              //   password: password.trim(),
+              // );
 
-              if (res == 1 && mounted) {
-                // goToPage(context, const RolePage(), clearStack: true);
-              }
+              // if (res == 1 && mounted) {
+              //   // goToPage(context, const RolePage(), clearStack: true);
+              // }
             },
             text: "Log in",
           ),
