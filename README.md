@@ -1,33 +1,38 @@
-# LPU Events ~ Cod-A-FestX
+# 🎉 LPU Events App
 
-## Effortless Events, Seamless Success
+### _Effortless Events, Seamless Success_
 
-## Inspiration
+---
 
-Managing university events can be slow and frustrating with outdated methods. From manual announcements to long check-ins, the process needs a modern upgrade. We wanted to make event management easier and more efficient by using new technology. Our goal is to improve the experience for both event organizers and attendees. 🚀
+## 🚨 Problem Statement
 
-## TL;DR
+The current event management at the university is inefficient and manually intensive. The key issues include:
 
-**LPU Events** is a new app designed to make university event management easy and efficient. It automates announcements, simplifies data collection, handles payments, and allows fast QR code check-ins. 🌟
+1. Announcements need to be manually made, leading to delays and missed communications.
+2. Event organizers collect participant details manually using Google Forms, which is not streamlined.
+3. WhatsApp groups are manually created and managed for event-related notifications.
+4. The UI of the UMS for such announcements is unnecessarily coupled, making it hard to find event-related updates.
+5. Payments for any paid events are handled manually, where users must attach screenshots, causing difficulties in verifying payments and tracking transactions.
+6. Event check-ins are managed manually, leading to long wait times and errors in attendance tracking.
 
-## What It Does
+---
 
-Our app makes managing events simpler by:
+## 💡 Solution Statement
 
-- **Automating Announcements:** Sends updates and reminders automatically through push notifications. 📣
-- **Streamlining Data Collection:** Uses in-app registration instead of Google Forms. 📝
-- **Managing Notifications:** Keeps everyone informed without manual effort. 🔔
-- **Enhancing UI/UX:** Provides a clean and easy-to-use interface for managing events. 🎨
-- **Simplifying Payments:** Includes a payment system that verifies transactions, so users don’t need to upload screenshots. 💳
-- **Facilitating QR Code Check-ins:** Makes event entry quicker and reduces errors with QR codes. 📲
+To address these issues, the event management app would:
 
-## How We Built It
+1. **Automate Announcements:** Implement a centralized system to automatically notify users about event updates and reminders via push notifications.
+2. **Integrated Data Collection:** Use in-app registration to simplify participant data collection and eliminate the need for Google Forms.
+3. **Automated Notifications:** Automate in-app notifications, ensuring efficient and timely communication.
+4. **Streamlined UI/UX:** Decouple the UMS UI from event management, offering a cleaner and more intuitive interface.
+5. **Integrated Payment Gateway:** Incorporate a built-in payment system that verifies transactions automatically, removing the need for screenshot uploads.
+6. **QR Code Check-ins:** Introduce QR code check-ins to enable faster and more efficient event entry, reducing errors and wait times.
 
-- **Design:** Used Figma to create an easy-to-use app design. 🎨
-- **Frontend:** Built the app with Flutter so it works on both iOS and Android. 📱
-- **Backend:** Developed the server-side using NodeJS with Express. 🔧
-- **Database:** Used MongoDBAtlas for storing and managing data. 🗄️
+---
 
-## Looking Ahead
+## 📅 Additional Features
 
-We plan to add more features like calendar integration, detailed event analytics, a feedback system, and support for sponsors to make the app even better. 🌍✨
+- **Calendar Sync:** Sync events with user calendars for automatic reminders.
+- **Event Analytics:** Provide insights into attendance, engagement, and other event data.
+- **Feedback Mechanism:** Allow attendees to submit feedback directly through the app.
+- **Sponsor Integration:** Facilitate partnerships with sponsors for event promotion and ad placements.
