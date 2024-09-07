@@ -27,7 +27,10 @@ const userSchema = new Schema({
 		type: String,
 		enum: ["manager", "attendee"],
 		default: "attendee"
-	}
+	},
+    eventsRegistered: [
+        { type: Schema.Types.ObjectId, ref: 'Event' }
+    ]
 });
 
 userSchema.pre("save", async function (next) {

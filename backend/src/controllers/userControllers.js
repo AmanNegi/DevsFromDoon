@@ -1,5 +1,6 @@
 const User = require('../models/User');
-const bcrypt = require("bcrypt");
+const Event = require('../models/Event');
+const bcrypt = require('bcrypt');
 
 exports.login = async (req, res) => {
 	const { registrationNo, password } = req.body;
@@ -38,4 +39,21 @@ exports.register = async (req, res) => {
         return res.status(500).json({ message: err.message });
     }
 
+}
+
+exports.registerForEvent = async (req, res) => {
+    try{
+        const eventId = req.body.eventId;
+        const userId = req.body.userId;
+        const event = await Event.findOne({_id:eventId});
+        const user = await User.findOne({_id:userId});
+        if(!event || !user)return res.status(404).json({ message: 'user or event Not found' });
+        event.attendees.push(userId);
+        user.eventsRegistered.push(eventId);
+        await Promise.all([event.save(), user.save()]);
+        return res.status(200).json({ message: 'successfully added', event, user });
+    } catch (error){
+        console.log(error.message);
+        return res.status(500).json({ message:"error"});
+    }
 }
