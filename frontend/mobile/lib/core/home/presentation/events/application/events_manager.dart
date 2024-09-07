@@ -60,7 +60,7 @@ class EventsManager {
     List<Event> events = (mappedBody["events"] as List<dynamic>)
         .map((e) => Event.fromMap(e))
         .toList();
-
+      
     ref.read(eventRepository).setMyEvents(events);
     return 1;
   }

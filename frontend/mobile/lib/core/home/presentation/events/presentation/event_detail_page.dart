@@ -39,10 +39,9 @@ class _EventDetailPageState extends State<EventDetailPage> {
               crossAxisAlignment: WrapCrossAlignment.start,
               spacing: 5.0,
               children: [
-                getChip(widget.event.paid ? "Paid" : "Free"),
+                getChip(widget.event.price! > 0 ? "Paid" : "Free"),
                 if (widget.event.price! > 0)
-                  getChip(
-                      widget.event.price.toString()),
+                  getChip(widget.event.price.toString()),
                 getChip(widget.event.isLeaveProvided
                     ? "DL Provided"
                     : "No DL Provided"),

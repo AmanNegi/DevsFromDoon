@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lpu_events/cache/app_cache.dart';
 import 'package:lpu_events/core/home/presentation/event_item.dart';
 import 'package:lpu_events/core/home/presentation/events/application/events_manager.dart';
 import 'package:lpu_events/core/home/presentation/events/application/events_repository.dart';
@@ -26,7 +27,9 @@ class _GroupsPageState extends ConsumerState<GroupsPage> {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       Future.wait([
-        eventsManager.getAllRegisteredEvents(),
+        appState.value.user!.role == "manager"
+            ? eventsManager.getAllEventsOfManager()
+            : eventsManager.getAllRegisteredEvents(),
       ]);
     });
   }

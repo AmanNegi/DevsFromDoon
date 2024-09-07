@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:lpu_events/cache/app_cache.dart';
 import 'package:lpu_events/core/home/presentation/admin/application/add_event_repository.dart';
+import 'package:lpu_events/globals.dart';
 import 'package:lpu_events/models/event.dart';
 import 'package:lpu_events/utils/firebase_storage.dart';
 import 'package:lpu_events/widgets/action_button.dart';
@@ -105,7 +106,8 @@ class AddItemPageState extends State<AddItemPage> {
   _getBody() {
     return SingleChildScrollView(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 15.0),
+        margin: EdgeInsets.only(
+            right: 15.0, left: 15.0, bottom: 0.2 * getHeight(context)),
         height: height,
         child: Column(
           children: [
@@ -117,6 +119,65 @@ class AddItemPageState extends State<AddItemPage> {
               layoutBuilder: (currentChild, previousChildren) =>
                   currentChild ?? Container(),
             ),
+            Container(
+              height: 0.025 * height,
+            ),
+            _getTextField(
+              "Name",
+              ((e) => name = e),
+              TextInputType.text,
+            ),
+            _getTextField(
+              "Description",
+              ((e) => description = e),
+              TextInputType.text,
+            ),
+            _getTextField(
+              "Price",
+              ((e) => price = double.parse(e)),
+              TextInputType.number,
+            ),
+            _getTextField(
+              "Venue",
+              ((e) => venue = e),
+              TextInputType.text,
+            ),
+            // Date Picker
+            ListTile(
+              title: Text(
+                selectedDate == null
+                    ? "Select Date"
+                    : DateFormat.yMMMd().format(selectedDate!),
+              ),
+              trailing: const Icon(Icons.calendar_today),
+              onTap: () => _selectDate(context),
+            ),
+            ListTile(
+              title: Text(
+                selectedTime == null
+                    ? "Select Time"
+                    : selectedTime!.format(context),
+              ),
+              trailing: const Icon(Icons.access_time),
+              onTap: () => _selectTime(context),
+            ),
+
+            SwitchListTile(
+              title: const Text("Duty Leave"),
+              value: isDownloadEnabled,
+              onChanged: (bool value) {
+                setState(() {
+                  isDownloadEnabled = value;
+                });
+              },
+            ),
+
+            const SizedBox(height: 20),
+            ActionButton(
+              isFilled: false,
+              text: ("Add Field"),
+              onPressed: () {},
+            ),
           ],
         ),
       ),
@@ -124,84 +185,28 @@ class AddItemPageState extends State<AddItemPage> {
   }
 
   _getImageSelector() {
-    return Column(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: SizedBox(
-            height: 0.3 * height,
-            width: double.infinity,
-            child: pickedImage
-                ? GestureDetector(
-                    onTap: () {
-                      pickAnImage();
-                    },
-                    child: Image.file(
-                      File(imageUrl),
-                      fit: BoxFit.contain,
-                    ),
-                  )
-                : ActionButton(
-                    onPressed: () async {
-                      await pickAnImage();
-                    },
-                    text: ("Pick an Image"),
-                  ),
-          ),
-        ),
-        Container(
-          height: 0.025 * height,
-        ),
-        _getTextField(
-          "Name",
-          ((e) => name = e),
-          TextInputType.text,
-        ),
-        _getTextField(
-          "Description",
-          ((e) => description = e),
-          TextInputType.text,
-        ),
-        _getTextField(
-          "Price",
-          ((e) => price = double.parse(e)),
-          TextInputType.number,
-        ),
-        _getTextField(
-          "Venue",
-          ((e) => venue = e),
-          TextInputType.text,
-        ),
-        // Date Picker
-        ListTile(
-          title: Text(
-            selectedDate == null
-                ? "Select Date"
-                : DateFormat.yMMMd().format(selectedDate!),
-          ),
-          trailing: const Icon(Icons.calendar_today),
-          onTap: () => _selectDate(context),
-        ),
-        ListTile(
-          title: Text(
-            selectedTime == null
-                ? "Select Time"
-                : selectedTime!.format(context),
-          ),
-          trailing: const Icon(Icons.access_time),
-          onTap: () => _selectTime(context),
-        ),
-
-        SwitchListTile(
-          title: const Text("Duty Leave"),
-          value: isDownloadEnabled,
-          onChanged: (bool value) {
-            setState(() {
-              isDownloadEnabled = value;
-            });
-          },
-        ),
-      ],
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10.0),
+      child: SizedBox(
+        height: 0.3 * height,
+        width: double.infinity,
+        child: pickedImage
+            ? GestureDetector(
+                onTap: () {
+                  pickAnImage();
+                },
+                child: Image.file(
+                  File(imageUrl),
+                  fit: BoxFit.contain,
+                ),
+              )
+            : ActionButton(
+                onPressed: () async {
+                  await pickAnImage();
+                },
+                text: ("Pick an Image"),
+              ),
+      ),
     );
   }
 
