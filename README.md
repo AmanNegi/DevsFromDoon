@@ -5,6 +5,13 @@ A platform that helps organizers to organize events in LPU efficiently. Currentl
 ![slide2](https://github.com/user-attachments/assets/165abc98-8cc2-48c2-9f9f-43ea92d75c2e)
 
 
+## Dummy Credentials
+
+```
+12300316 password:a attendee
+12345678 password: event manager
+```
+
 ## ⏳ App Flow 
 
 1. Organizer creates an event, and asks for required information.
