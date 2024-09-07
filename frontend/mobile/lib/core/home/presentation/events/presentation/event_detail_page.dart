@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lpu_events/colors.dart';
+import 'package:lpu_events/core/form/presentation/form_page.dart';
 import 'package:lpu_events/globals.dart';
 import 'package:lpu_events/models/event.dart';
+import 'package:lpu_events/widgets/action_button.dart';
 
 class EventDetailPage extends StatefulWidget {
   final Event event;
@@ -18,8 +20,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
       appBar: AppBar(
         title: Text(widget.event.name),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
         children: [
           Image.network(widget.event.imageUrl),
           SizedBox(height: 0.02 * getHeight(context)),
@@ -41,6 +42,17 @@ class _EventDetailPageState extends State<EventDetailPage> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(widget.event.description),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: ActionButton(
+              isFilled: false,
+              text: "Register",
+              onPressed: () {
+                goToPage(context, FormPage(event: widget.event));
+              },
+            ),
           ),
         ],
       ),

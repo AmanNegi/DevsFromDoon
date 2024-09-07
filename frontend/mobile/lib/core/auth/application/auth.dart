@@ -2,8 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lpu_events/cache/app_cache.dart';
+import 'package:lpu_events/core/auth/application/auth_repository.dart';
 import 'package:lpu_events/globals.dart';
 import "package:http/http.dart" as http;
+import 'package:lpu_events/models/app_state.dart';
+import 'package:lpu_events/models/user.dart';
 
 class AuthManager {
   final BuildContext context;
@@ -16,24 +20,24 @@ class AuthManager {
     required String email,
     required String password,
   }) async {
-    // ref.read(authProvider).clearUserData();
+    ref.read(authProvider).clearUserData();
     isLoading.value = true;
     try {
       var response = await http.post(
-        Uri.parse("$API_URL/auth/login"),
+        Uri.parse("$API_URL/users/login"),
         headers: {
           "Content-Type": "application/json",
         },
         body: json.encode({
-          "email": email,
+          "registrationNo": email,
           "password": password,
         }),
       );
       isLoading.value = false;
       Map data = json.decode(response.body);
 
-      if (data["statusCode"] == 200) {
-        // ref.read(authProvider).updateUserData(User.fromMap(data["data"]));
+      if (response.statusCode == 200) {
+        ref.read(authProvider).updateUserData(User.fromMap(data["user"]));
         return 1;
       } else {
         showToast(data["message"]);

@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const Event = require('../models/Event');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 exports.login = async (req, res) => {
 	const { registrationNo, password } = req.body;
