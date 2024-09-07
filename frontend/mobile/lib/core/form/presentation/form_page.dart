@@ -61,45 +61,45 @@ class _FormPageState extends State<FormPage> {
             text: "Submit",
             onPressed: () {
               showModalBottomSheet(
-                  isDismissible: false,
-                  context: context,
-                  builder: (context) {
-                    return Container(
-                      width: double.infinity,
-                      height: 0.4 * MediaQuery.of(context).size.height,
-                      color: Colors.white,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Form Submitted Successfully",
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600,
-                            ),
+                isDismissible: false,
+                context: context,
+                builder: (context) {
+                  return Container(
+                    width: double.infinity,
+                    height: 0.4 * MediaQuery.of(context).size.height,
+                    color: Colors.white,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Form Submitted Successfully",
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
                           ),
-                          SizedBox(height: 0.025 * getHeight(context)),
-                          SvgPicture.asset(
-                            "assets/done.svg",
-                            height: 0.2 * getHeight(context),
+                        ),
+                        SizedBox(height: 0.025 * getHeight(context)),
+                        SvgPicture.asset(
+                          "assets/done.svg",
+                          height: 0.2 * getHeight(context),
+                        ),
+                        SizedBox(height: 0.025 * getHeight(context)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: ActionButton(
+                            isFilled: false,
+                            text: "Close",
+                            onPressed: () {
+                              goToPage(context, const HomePage(),
+                                  clearStack: true);
+                            },
                           ),
-                          SizedBox(height: 0.025 * getHeight(context)),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: ActionButton(
-                              isFilled: false,
-                              text: "Close",
-                              onPressed: () {
-                                goToPage(context, const HomePage(),
-                                    clearStack: true);
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  });
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
             },
           )
         ],

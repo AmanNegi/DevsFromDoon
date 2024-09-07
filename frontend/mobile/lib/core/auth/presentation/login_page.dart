@@ -23,7 +23,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   void initState() {
     _authManager = AuthManager(context, ref);
-
     super.initState();
   }
 
@@ -81,32 +80,53 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           ActionButton(
             isFilled: true,
             onPressed: () async {
-              return goToPage(context, const HomePage(), clearStack: true);
-              // if (email.trim().isEmpty) {
-              //   showToast("Enter a valid email");
-              //   return;
-              // }
+              if (email.trim().isEmpty) {
+                showToast("Enter a valid email");
+                return;
+              }
 
-              // if (password.trim().isEmpty) {
-              //   showToast("Enter a valid password");
-              //   return;
-              // }
+              if (password.trim().isEmpty) {
+                showToast("Enter a valid password");
+                return;
+              }
 
-              // var res = await _authManager.loginUsingEmailPassword(
-              //   email: email.trim(),
-              //   password: password.trim(),
-              // );
+              var res = await _authManager.loginUsingEmailPassword(
+                email: email.trim(),
+                password: password.trim(),
+              );
 
-              // if (res == 1 && mounted) {
-              //   // goToPage(context, const RolePage(), clearStack: true);
-              // }
+              if (res == 1 && mounted) {
+                goToPage(context, const HomePage(), clearStack: true);
+              }
             },
             text: "Log in",
           ),
           SizedBox(height: 0.015 * getHeight(context)),
           GestureDetector(
-            onTap: (){
-              
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    width: double.infinity,
+                    height: 0.4 * MediaQuery.of(context).size.height,
+                    color: Colors.white,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "To be done!",
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(height: 0.025 * getHeight(context)),
+                      ],
+                    ),
+                  );
+                },
+              );
             },
             // onTap: () => goToPage(
             //   context,

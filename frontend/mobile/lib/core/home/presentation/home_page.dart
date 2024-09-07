@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lpu_events/colors.dart';
+import 'package:lpu_events/core/auth/presentation/login_page.dart';
+import 'package:lpu_events/core/home/presentation/admin/presentation/admin_page.dart';
 import 'package:lpu_events/core/home/presentation/events/presentation/event_page.dart';
+import 'package:lpu_events/globals.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +16,7 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   int currentIndex = 0;
   late TabController controller;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -23,10 +27,34 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: bgColor,
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const UserAccountsDrawerHeader(
+              accountName: Text("Aman Negi"),
+              accountEmail: Text("12300316"),
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text("Logout"),
+              onTap: () => {
+                goToPage(context, const LoginPage(), clearStack: true),
+              },
+            )
+          ],
+        ),
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: const Text("LPU Events"),
+        leading: IconButton(
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+          icon: const Icon(Icons.menu),
+        ),
         actions: [
           IconButton(
             onPressed: () {},
@@ -40,7 +68,8 @@ class _HomePageState extends State<HomePage>
             child: TabBarView(
               controller: controller,
               children: [
-                const EventPage(),
+                // const EventPage(),
+                const AdminPage(),
                 Container(
                   color: Colors.yellow,
                 ),

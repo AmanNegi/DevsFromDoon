@@ -24,7 +24,7 @@ LinearGradient shimmerGradient = LinearGradient(colors: [
   Colors.grey.shade300,
 ]);
 
-const API_URL = "localhost:3000";
+const API_URL = "https://964e-152-59-118-43.ngrok-free.app/api";
 const eventImages = [
   'https://exchange4media.gumlet.io/news-photo/133240-big.jpg',
   'https://edexec.co.uk/wp-content/uploads/2020/02/iStock-1031459248-2.jpg',
