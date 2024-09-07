@@ -2,7 +2,7 @@
 	"javascript.validate.enable": true,
 	"javascript.suggestionActions.enabled": false,
 	"[javascript]": {
-		"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true,
 		"editor.codeActionsOnSave": [
 			"source.formatDocument",
