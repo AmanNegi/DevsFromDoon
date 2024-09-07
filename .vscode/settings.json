@@ -1,0 +1,15 @@
+{
+	"javascript.validate.enable": true,
+	"javascript.suggestionActions.enabled": false,
+	"[javascript]": {
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": [
+			"source.formatDocument",
+			"source.fixAll.eslint",
+			"source.fixAll.explicit"
+		]
+	},
+	"terminal.integrated.defaultProfile.windows": "Git Bash",
+	"terminal.integrated.defaultProfile.linux": "bash"
+}
