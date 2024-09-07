@@ -40,9 +40,9 @@ class _EventDetailPageState extends State<EventDetailPage> {
               spacing: 5.0,
               children: [
                 getChip(widget.event.paid ? "Paid" : "Free"),
-                if (widget.event.paid)
+                if (widget.event.price! > 0)
                   getChip(
-                      widget.event.paid ? widget.event.price.toString() : ""),
+                      widget.event.price.toString()),
                 getChip(widget.event.isLeaveProvided
                     ? "DL Provided"
                     : "No DL Provided"),
@@ -52,6 +52,11 @@ class _EventDetailPageState extends State<EventDetailPage> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(widget.event.description),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Text(
+                "Total Number of Attendees: ${widget.event.attendees.length}"),
           ),
           const SizedBox(height: 20),
           if (showRegisterButton())

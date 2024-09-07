@@ -14,8 +14,8 @@ class EventItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat.yMMMMd().format(DateTime.now());
-    String time = DateFormat.jm().format(DateTime.now());
+    String formattedDate = DateFormat.yMMMMd().format(event.date!);
+    String time = DateFormat.jm().format(event.date!);
     return GestureDetector(
       onTap: () {
         goToPage(context, EventDetailPage(event: event));
@@ -30,14 +30,8 @@ class EventItem extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 15.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
+                  border: Border.all(color: Colors.grey.withOpacity(0.4)),
                   borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10.0,
-                      spreadRadius: 10.0,
-                    )
-                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,16 +90,16 @@ class EventItem extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: event.paid ? 5.0 : 0.0),
+                    margin: const EdgeInsets.only(top: 5.0),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10.0, vertical: 5.0),
                     decoration: BoxDecoration(
-                      color: accentColor,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Text(
-                      event.paid ? "₹${event.price}" : "Free",
-                      style: const TextStyle(color: Colors.white),
+                      event.price! > 0 ? "₹${event.price}" : "Free",
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ),
                 ],

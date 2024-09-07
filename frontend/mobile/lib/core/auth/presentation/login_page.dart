@@ -102,56 +102,56 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             text: "Log in",
           ),
           SizedBox(height: 0.015 * getHeight(context)),
-          GestureDetector(
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return Container(
-                    width: double.infinity,
-                    height: 0.4 * MediaQuery.of(context).size.height,
-                    color: Colors.white,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "To be done!",
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(height: 0.025 * getHeight(context)),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-            // onTap: () => goToPage(
-            //   context,
-            //   const SignUpPage(),
-            //   clearStack: true,
-            // ),
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                style: Theme.of(context).textTheme.bodyMedium,
-                children: [
-                  const TextSpan(
-                    text: "Want to host your event?\n",
-                  ),
-                  TextSpan(
-                    text: " Request for access",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: () {
+          //     showModalBottomSheet(
+          //       context: context,
+          //       builder: (context) {
+          //         return Container(
+          //           width: double.infinity,
+          //           height: 0.4 * MediaQuery.of(context).size.height,
+          //           color: Colors.white,
+          //           child: Column(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               const Text(
+          //                 "To be done!",
+          //                 style: TextStyle(
+          //                   fontSize: 17,
+          //                   fontWeight: FontWeight.w600,
+          //                 ),
+          //               ),
+          //               SizedBox(height: 0.025 * getHeight(context)),
+          //             ],
+          //           ),
+          //         );
+          //       },
+          //     );
+          //   },
+          //   // onTap: () => goToPage(
+          //   //   context,
+          //   //   const SignUpPage(),
+          //   //   clearStack: true,
+          //   // ),
+          //   child: RichText(
+          //     textAlign: TextAlign.center,
+          //     text: TextSpan(
+          //       style: Theme.of(context).textTheme.bodyMedium,
+          //       children: [
+          //         const TextSpan(
+          //           text: "Want to host your event?\n",
+          //         ),
+          //         TextSpan(
+          //           text: " Request for access",
+          //           style: TextStyle(
+          //             fontWeight: FontWeight.w600,
+          //             color: Theme.of(context).primaryColor,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

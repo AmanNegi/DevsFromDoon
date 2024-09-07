@@ -57,12 +57,9 @@ exports.eventsOfUser = async (req, res) => {
 			return res.status(404).json({ message: 'User not found' });
 		}
 
-		if (user.eventsRegistered.length === 0) {
-			return res.status(200).json({
-				message: 'User has not registered for any events',
-				events: [],
-			});
-		}
+        if (user.eventsRegistered.length === 0) {
+            return res.status(200).json({ message: "User has not registered for any events", events: [] });
+        }	
 
 		const events = await Event.find({ _id: { $in: user.eventsRegistered } });
 

@@ -4,6 +4,7 @@ import 'package:lpu_events/colors.dart';
 import 'package:lpu_events/core/auth/presentation/login_page.dart';
 import 'package:lpu_events/core/home/presentation/admin/presentation/admin_page.dart';
 import 'package:lpu_events/core/home/presentation/events/presentation/event_page.dart';
+import 'package:lpu_events/core/home/presentation/groups/groups_page.dart';
 import 'package:lpu_events/core/home/presentation/search/presentation/search_page.dart';
 import 'package:lpu_events/globals.dart';
 
@@ -72,9 +73,7 @@ class _HomePageState extends State<HomePage>
               children: [
                 appCache.isManager() ? const AdminPage() : const EventPage(),
                 const SearchPage(),
-                Container(
-                  color: Colors.orange,
-                ),
+                const GroupsPage()
               ],
             ),
           ),

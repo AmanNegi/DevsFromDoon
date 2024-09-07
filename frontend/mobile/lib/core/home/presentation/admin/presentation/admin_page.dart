@@ -41,6 +41,7 @@ class _AdminPageState extends ConsumerState<AdminPage> {
                     event: e,
                   );
                 }).toList(),
+                SizedBox(height: 0.2 * getHeight(context)),
               ],
             ),
           ),
@@ -50,8 +51,9 @@ class _AdminPageState extends ConsumerState<AdminPage> {
           bottom: kToolbarHeight + 10,
           child: FloatingActionButton.extended(
             elevation: 1,
-            onPressed: () {
-              goToPage(context, const AddItemPage());
+            onPressed: () async {
+              final res = await goToPage(context, const AddItemPage());
+              eventsManager.getAllEventsOfManager();
             },
             icon: const Icon(Icons.add),
             label: const Text("Add Event"),
