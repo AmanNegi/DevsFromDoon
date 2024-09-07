@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lpu_events/cache/app_cache.dart';
 import 'package:lpu_events/colors.dart';
 import 'package:lpu_events/core/auth/presentation/login_page.dart';
 import 'package:lpu_events/core/home/presentation/admin/presentation/admin_page.dart';
 import 'package:lpu_events/core/home/presentation/events/presentation/event_page.dart';
+import 'package:lpu_events/core/home/presentation/search/presentation/search_page.dart';
 import 'package:lpu_events/globals.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,9 +34,9 @@ class _HomePageState extends State<HomePage>
       drawer: Drawer(
         child: ListView(
           children: [
-            const UserAccountsDrawerHeader(
-              accountName: Text("Aman Negi"),
-              accountEmail: Text("12300316"),
+            UserAccountsDrawerHeader(
+              accountName: Text(appCache.getUserName()),
+              accountEmail: Text(appState.value.user!.registrationNo),
             ),
             ListTile(
               leading: const Icon(Icons.logout),
@@ -68,11 +70,8 @@ class _HomePageState extends State<HomePage>
             child: TabBarView(
               controller: controller,
               children: [
-                // const EventPage(),
-                const AdminPage(),
-                Container(
-                  color: Colors.yellow,
-                ),
+                appCache.isManager() ? const AdminPage() : const EventPage(),
+                const SearchPage(),
                 Container(
                   color: Colors.orange,
                 ),

@@ -1,63 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lpu_events/colors.dart';
 import 'package:lpu_events/core/home/presentation/event_item.dart';
-import 'package:lpu_events/globals.dart';
-import 'package:lpu_events/models/event.dart';
+import 'package:lpu_events/core/home/presentation/events/application/events_manager.dart';
+import 'package:lpu_events/core/home/presentation/events/application/events_repository.dart';
+import 'package:lpu_events/widgets/loading_widget.dart';
 
-class EventPage extends StatefulWidget {
+class EventPage extends ConsumerStatefulWidget {
   const EventPage({super.key});
 
   @override
-  State<EventPage> createState() => _EventPageState();
+  ConsumerState<EventPage> createState() => _EventPageState();
 }
 
-class _EventPageState extends State<EventPage> {
+class _EventPageState extends ConsumerState<EventPage> {
+  late EventsManager eventsManager;
+
+  @override
+  void initState() {
+    eventsManager = EventsManager(context, ref);
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Future.wait([
+        eventsManager.getAllEvents(),
+        eventsManager.getAllRegisteredEvents(),
+      ]);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
-      body: ListView(
-        padding: const EdgeInsets.only(
-          left: 15.0,
-          right: 15.0,
-          bottom: kToolbarHeight,
-          top: 15.0,
+      body: LoadingWidget(
+        isLoading: eventsManager.isLoading,
+        child: ListView(
+          padding: const EdgeInsets.only(
+            left: 15.0,
+            right: 15.0,
+            bottom: kToolbarHeight,
+            top: 15.0,
+          ),
+          children: [
+            if (ref.watch(eventRepository).myEvents.isNotEmpty)
+              getHeading("Registered Events"),
+            ...ref.watch(eventRepository).myEvents.map((e) {
+              return EventItem(event: e);
+            }).toList(),
+            if (ref.watch(eventRepository).events.isNotEmpty)
+              getHeading("Upcoming Events"),
+            ...ref.watch(eventRepository).events.map((e) {
+              return EventItem(
+                event: e,
+              );
+            }).toList(),
+          ],
         ),
-        children: [
-          getHeading("Registered Events"),
-          EventItem(
-            event: Event(
-              name: "Event Name",
-              description:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-              imageUrl:
-                  "https://cdn0.weddingwire.in/vendor/3007/3_2/960/jpg/rock-music-event1_15_163007-163973098155561.jpeg",
-              paid: true,
-              price: 20,
-              isLeaveProvided: true,
-              venue: "LA",
-              date: DateTime.now(),
-            ),
-          ),
-          getHeading("Upcoming Events"),
-          ...List.generate(
-            4,
-            (index) => EventItem(
-              event: Event(
-                name: "Event Name",
-                description:
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                imageUrl:
-                    "https://cdn0.weddingwire.in/vendor/3007/3_2/960/jpg/rock-music-event1_15_163007-163973098155561.jpeg",
-                paid: true,
-                price: 20,
-                isLeaveProvided: true,
-                venue: "LA",
-                date: DateTime.now(),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

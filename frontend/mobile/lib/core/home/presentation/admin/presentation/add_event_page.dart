@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:lpu_events/cache/app_cache.dart';
+import 'package:lpu_events/core/home/presentation/admin/application/add_event_repository.dart';
+import 'package:lpu_events/models/event.dart';
 import 'package:lpu_events/utils/firebase_storage.dart';
 import 'package:lpu_events/widgets/action_button.dart';
 import 'package:lpu_events/widgets/loading_widget.dart';
@@ -18,12 +21,11 @@ class AddItemPage extends StatefulWidget {
 class AddItemPageState extends State<AddItemPage> {
   late double height, width;
 
-  String name = "", description = "";
+  String name = "", description = "", venue = "";
   double price = 0.0;
   String imageUrl = "";
   bool pickedImage = false;
   bool isDownloadEnabled = false;
-  bool isFree = false;
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
 
@@ -62,18 +64,26 @@ class AddItemPageState extends State<AddItemPage> {
     return FloatingActionButton.extended(
       onPressed: () async {
         isLoading.value = true;
-        String itemId = const Uuid().v1();
 
-        // String url =
-        //     await storageManager.uploadItemImage(itemId, File(imageUrl));
+        AddEventManager mg = AddEventManager();
+        final id = const Uuid().v4();
+        String url = await storageManager.uploadItemImage(id, File(imageUrl));
 
-        // await addItem(
-        //   name: name,
-        //   listedBy: appState.value.user!.id,
-        //   description: description,
-        //   images: [url],
-        //   price: price,
-        // );
+        mg.addEvent(
+          Event(
+              id: id,
+              title: name,
+              imageUrl: url,
+              description: description,
+              venue: venue,
+              createdBy: appState.value.user!.id,
+              date: selectedDate,
+              price: price,
+              paid: price == 0,
+              isLeaveProvided: isDownloadEnabled,
+              attendees: []),
+        );
+
         isLoading.value = false;
         if (mounted) {
           Navigator.pop(context);
@@ -159,8 +169,8 @@ class AddItemPageState extends State<AddItemPage> {
         ),
         _getTextField(
           "Venue",
-          ((e) => price = double.parse(e)),
-          TextInputType.number,
+          ((e) => venue = e),
+          TextInputType.text,
         ),
         // Date Picker
         ListTile(

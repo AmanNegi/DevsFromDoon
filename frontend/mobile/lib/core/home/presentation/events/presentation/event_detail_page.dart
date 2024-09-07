@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lpu_events/cache/app_cache.dart';
 import 'package:lpu_events/colors.dart';
 import 'package:lpu_events/core/form/presentation/form_page.dart';
+import 'package:lpu_events/core/home/presentation/events/application/events_manager.dart';
+import 'package:lpu_events/core/home/presentation/events/application/events_repository.dart';
 import 'package:lpu_events/globals.dart';
 import 'package:lpu_events/models/event.dart';
 import 'package:lpu_events/widgets/action_button.dart';
@@ -18,11 +22,15 @@ class _EventDetailPageState extends State<EventDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.event.name),
+        title: Text(widget.event.title),
       ),
       body: ListView(
         children: [
-          Image.network(widget.event.imageUrl),
+          Image.network(
+            widget.event.imageUrl,
+            height: 0.4 * getHeight(context),
+            fit: BoxFit.cover,
+          ),
           SizedBox(height: 0.02 * getHeight(context)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -32,7 +40,9 @@ class _EventDetailPageState extends State<EventDetailPage> {
               spacing: 5.0,
               children: [
                 getChip(widget.event.paid ? "Paid" : "Free"),
-                getChip(widget.event.paid ? widget.event.price.toString() : ""),
+                if (widget.event.paid)
+                  getChip(
+                      widget.event.paid ? widget.event.price.toString() : ""),
                 getChip(widget.event.isLeaveProvided
                     ? "DL Provided"
                     : "No DL Provided"),
@@ -44,19 +54,31 @@ class _EventDetailPageState extends State<EventDetailPage> {
             child: Text(widget.event.description),
           ),
           const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: ActionButton(
-              isFilled: false,
-              text: "Register",
-              onPressed: () {
-                goToPage(context, FormPage(event: widget.event));
-              },
+          if (showRegisterButton())
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: ActionButton(
+                isFilled: false,
+                text: "Register",
+                onPressed: () {
+                  goToPage(context, FormPage(event: widget.event));
+                },
+              ),
             ),
-          ),
         ],
       ),
     );
+  }
+
+  bool showRegisterButton() {
+    print("Values ${appState.value.user!.id} || ${widget.event.createdBy}");
+    if (widget.event.createdBy == appState.value.user!.id) {
+      return false;
+    } else if (widget.event.attendees.contains(appState.value.user!.id)) {
+      return false;
+    }
+
+    return true;
   }
 
   Container getChip(String text) {

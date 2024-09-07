@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:lpu_events/cache/app_cache.dart';
 import 'package:lpu_events/colors.dart';
 import 'package:lpu_events/core/home/presentation/events/presentation/event_detail_page.dart';
 import 'package:lpu_events/globals.dart';
@@ -48,8 +49,7 @@ class EventItem extends StatelessWidget {
                           topRight: Radius.circular(10.0),
                         ),
                         child: Image.network(
-                          // event.imageUrl,
-                          eventImages[Random().nextInt(4)],
+                          event.imageUrl,
                           height: 0.135 * getHeight(context),
                           width: double.infinity,
                           fit: BoxFit.cover,
@@ -63,7 +63,7 @@ class EventItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            event.name,
+                            event.title,
                             style: const TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600,

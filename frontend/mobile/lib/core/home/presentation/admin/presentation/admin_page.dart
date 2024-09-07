@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lpu_events/core/home/presentation/admin/presentation/add_event_page.dart';
+import 'package:lpu_events/core/home/presentation/event_item.dart';
+import 'package:lpu_events/core/home/presentation/events/application/events_manager.dart';
+import 'package:lpu_events/core/home/presentation/events/application/events_repository.dart';
 import 'package:lpu_events/globals.dart';
 
-class AdminPage extends StatefulWidget {
+class AdminPage extends ConsumerStatefulWidget {
   const AdminPage({super.key});
 
   @override
-  State<AdminPage> createState() => _AdminPageState();
+  ConsumerState<AdminPage> createState() => _AdminPageState();
 }
 
-class _AdminPageState extends State<AdminPage> {
+class _AdminPageState extends ConsumerState<AdminPage> {
+  late EventsManager eventsManager;
+
+  @override
+  void initState() {
+    eventsManager = EventsManager(context, ref);
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      eventsManager.getAllEventsOfManager();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,10 +33,14 @@ class _AdminPageState extends State<AdminPage> {
         Positioned.fill(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: ListView(
               children: [
                 getHeading("Your Events"),
+                ...ref.watch(eventRepository).myEvents.map((e) {
+                  return EventItem(
+                    event: e,
+                  );
+                }).toList(),
               ],
             ),
           ),
