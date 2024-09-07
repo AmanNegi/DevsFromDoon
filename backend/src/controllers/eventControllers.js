@@ -1,5 +1,5 @@
 const Event = require('../models/Event');
-const Event = require('../models/User');
+const User = require('../models/User');
 
 exports.registerEvent = async (req,res) => {
     try{
