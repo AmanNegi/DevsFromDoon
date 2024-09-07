@@ -16,7 +16,6 @@ exports.registerEvent = async (req,res) => {
     }   
 };
 
-
 exports.eventById = async (req,res) => {
     try{
         const event = await Event.find({_id:req.body.id});
@@ -29,7 +28,6 @@ exports.eventById = async (req,res) => {
     }
 
 };
-
 
 exports.allEvents = async (req,res) => {
     try{
