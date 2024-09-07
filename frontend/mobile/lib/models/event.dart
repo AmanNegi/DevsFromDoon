@@ -6,6 +6,8 @@ class Event {
   final String name;
   final String imageUrl;
   final String description;
+  final String venue;
+  final DateTime? date;
   final double? price;
   final bool paid;
   final bool isLeaveProvided;
@@ -14,6 +16,8 @@ class Event {
     required this.name,
     required this.imageUrl,
     required this.description,
+    required this.venue,
+    this.date,
     this.price = 0.0,
     required this.paid,
     required this.isLeaveProvided,
@@ -23,6 +27,8 @@ class Event {
     String? name,
     String? imageUrl,
     String? description,
+    String? venue,
+    ValueGetter<DateTime?>? date,
     ValueGetter<double?>? price,
     bool? paid,
     bool? isLeaveProvided,
@@ -31,6 +37,8 @@ class Event {
       name: name ?? this.name,
       imageUrl: imageUrl ?? this.imageUrl,
       description: description ?? this.description,
+      venue: venue ?? this.venue,
+      date: date != null ? date() : this.date,
       price: price != null ? price() : this.price,
       paid: paid ?? this.paid,
       isLeaveProvided: isLeaveProvided ?? this.isLeaveProvided,
@@ -42,6 +50,8 @@ class Event {
       'name': name,
       'imageUrl': imageUrl,
       'description': description,
+      'venue': venue,
+      'date': date?.millisecondsSinceEpoch,
       'price': price,
       'paid': paid,
       'isLeaveProvided': isLeaveProvided,
@@ -53,6 +63,8 @@ class Event {
       name: map['name'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
       description: map['description'] ?? '',
+      venue: map['venue'] ?? '',
+      date: map['date'] != null ? DateTime.fromMillisecondsSinceEpoch(map['date']) : null,
       price: map['price']?.toDouble(),
       paid: map['paid'] ?? false,
       isLeaveProvided: map['isLeaveProvided'] ?? false,
@@ -65,29 +77,33 @@ class Event {
 
   @override
   String toString() {
-    return 'Event(name: $name, imageUrl: $imageUrl, description: $description, price: $price, paid: $paid, isLeaveProvided: $isLeaveProvided)';
+    return 'Event(name: $name, imageUrl: $imageUrl, description: $description, venue: $venue, date: $date, price: $price, paid: $paid, isLeaveProvided: $isLeaveProvided)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is Event &&
-        other.name == name &&
-        other.imageUrl == imageUrl &&
-        other.description == description &&
-        other.price == price &&
-        other.paid == paid &&
-        other.isLeaveProvided == isLeaveProvided;
+      other.name == name &&
+      other.imageUrl == imageUrl &&
+      other.description == description &&
+      other.venue == venue &&
+      other.date == date &&
+      other.price == price &&
+      other.paid == paid &&
+      other.isLeaveProvided == isLeaveProvided;
   }
 
   @override
   int get hashCode {
     return name.hashCode ^
-        imageUrl.hashCode ^
-        description.hashCode ^
-        price.hashCode ^
-        paid.hashCode ^
-        isLeaveProvided.hashCode;
+      imageUrl.hashCode ^
+      description.hashCode ^
+      venue.hashCode ^
+      date.hashCode ^
+      price.hashCode ^
+      paid.hashCode ^
+      isLeaveProvided.hashCode;
   }
 }

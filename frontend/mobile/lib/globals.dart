@@ -25,3 +25,9 @@ LinearGradient shimmerGradient = LinearGradient(colors: [
 ]);
 
 const API_URL = "localhost:3000";
+const eventImages = [
+  'https://exchange4media.gumlet.io/news-photo/133240-big.jpg',
+  'https://edexec.co.uk/wp-content/uploads/2020/02/iStock-1031459248-2.jpg',
+  'https://i.pinimg.com/736x/43/23/27/432327f68a83f9911cb25fea765e9252.jpg',
+  'https://img.freepik.com/premium-photo/young-adults-coding-together-hackathon-event_706399-17099.jpg',
+];
