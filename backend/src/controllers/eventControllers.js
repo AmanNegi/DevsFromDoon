@@ -4,8 +4,8 @@ const User = require('../models/User');
 exports.registerEvent = async (req,res) => {
     try{
         const id = req.body.id;
-        const user = User.find({_id : id});
-        if(!(user.role === "manager")){
+        const user = await User.findOne({_id : id});
+        if(user.role != "manager"){
             return res.status(400).send({message:"You are not a Manager"});
         }
         const event = new Event(req.body);
@@ -18,7 +18,7 @@ exports.registerEvent = async (req,res) => {
 
 exports.eventById = async (req,res) => {
     try{
-        const event = await Event.find({_id:req.body.id});
+        const event = await Event.find({_id:req.params.id});
         if(!event){
             throw new Error("Event is missing");
         }
