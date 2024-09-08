@@ -1,4 +1,5 @@
 # 🎉 LPU Events App
+> Install the [APK](https://github.com/AmanNegi/DevsFromDoon/releases/tag/0.1.1) on andriod devices.
 
 A platform that helps organizers to organize events in LPU efficiently. Currently organizers have to manually visit classes to inform about their event, also the announcement in LPU does not provide a useful addition to this. Organizers also have to go through the burden to float Google Forms and then create Whats App Groups, which is a long and tiring process. Our app aims to solve this issue by providing a platform which streamlines the entire process from creating events, accepting data from people, accepting payments and creating groups. 
 
@@ -7,9 +8,16 @@ A platform that helps organizers to organize events in LPU efficiently. Currentl
 
 ## Dummy Credentials
 
+### As a user
 ```
-12300316 password:a attendee
-12345678 password: event manager
+12300316
+password
+```
+
+### As a manager
+```
+12345678
+password
 ```
 
 ## ⏳ App Flow 
@@ -54,6 +62,12 @@ To address these issues, the event management app would:
 - **Feedback Mechanism:** Allow attendees to submit feedback directly through the app.
 - **Sponsor Integration:** Facilitate partnerships with sponsors for event promotion and ad placements.
 
+## 💻 Tech Stack
+
+- Frontend: Flutter
+- Backend: Node.js, Express.js, Firebase Storage, Firebase Messaging
+- Database: MongoDB
+- Deployment: Backend Deployed on Vercel
 
 ## 🧑‍🤝‍🧑 Contributors:
 
