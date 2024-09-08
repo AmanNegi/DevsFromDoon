@@ -6,3 +6,4 @@ node_modules
 src/swagger_output.json
 
 .vscode
+.vercel
