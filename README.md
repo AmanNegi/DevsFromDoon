@@ -2,13 +2,17 @@
 
 A platform that helps organizers to organize events in LPU efficiently. Currently organizers have to manually visit classes to inform about their event, also the announcement in LPU does not provide a useful addition to this. Organizers also have to go through the burden to float Google Forms and then create Whats App Groups, which is a long and tiring process. Our app aims to solve this issue by providing a platform which streamlines the entire process from creating events, accepting data from people, accepting payments and creating groups. 
 
-## App Flow 
+![slide2](https://github.com/user-attachments/assets/165abc98-8cc2-48c2-9f9f-43ea92d75c2e)
+
+
+## ⏳ App Flow 
 
 1. Organizer creates an event, and asks for required information.
 2. People register in the event, and provide the detail directly from the platform.
 3. If it's a paid event people can directly pay from our platform.
 4. A group is created automatically of all the members.
 
+---
 
 ## 🚨 Problem Statement
 
@@ -42,3 +46,11 @@ To address these issues, the event management app would:
 - **Event Analytics:** Provide insights into attendance, engagement, and other event data.
 - **Feedback Mechanism:** Allow attendees to submit feedback directly through the app.
 - **Sponsor Integration:** Facilitate partnerships with sponsors for event promotion and ad placements.
+
+
+## 🧑‍🤝‍🧑 Contributors:
+
+- Aman Negi
+- Shimanshu Chauhan
+- Aashutosh Singh
+- Vijay Khantwal
